@@ -40,14 +40,14 @@ app.get('/random-beers', (req, res) => {
   .catch(error => console.log(error))
 });
 
-app.get('/beers/id', (req, res) => {
-  //console.dir(req.path);
+app.get('/beers/:id', (req, res) => {
   punkAPI
-    .getBeers()
-    .then(allBeers => {
-      res.render('beer-details', {allBeers})
-    })
-    .catch(error => console.log(error));
+    .getBeer(req.params.id)
+    .then(beer => {
+      res.render('beer-details', beer[0])
+    }
+    )
+  ;
 })
 
 //const beerId = punkAPI.id;
